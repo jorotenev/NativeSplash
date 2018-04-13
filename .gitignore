@@ -1,4 +1,4 @@
-app/secrets.json
+app/unsplash_secrets.json
 node_modules/
 platforms/
 ./idea/
