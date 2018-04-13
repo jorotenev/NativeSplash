@@ -1,0 +1,8 @@
+app/secrets.json
+node_modules/
+platforms/
+./idea/
+.idea/
+!hooks/
+**/*.js
+*.apk
