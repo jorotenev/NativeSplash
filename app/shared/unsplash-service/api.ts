@@ -25,25 +25,37 @@ export function getPhotos(options?: UnsplashGetPhotosOpts): Promise<Photo[]> {
 
     const endpoint = "photos";
     const url = `${api_url}${endpoint}/?page=${opts.page}&per_page=${opts.per_page}&client_id=${access_token}`;
+    //todo remove fake
+    let fake = require("./fake_response.json");
+    return Promise.resolve(convertResponsePhotosToInternalFormat(fake))
+    // return new Promise(function (resolve, reject) {
+    //     http.getJSON(url)
+    //         .then(function (response: UnsplashPhotosResult[]) {
+    //             console.log(`API returned ${response.length} objects`);
+    //
+    //             // convert the response to our representation, since we don't need all of the properties.
+    //             let converted = convertResponsePhotosToInternalFormat(response)
+    //
+    //             resolve(converted)
+    //         }, err => {
+    //             console.dir(err);
+    //             reject(err)
+    //         });
+    // })
 
-    return http.getJSON(url).then(function (response: UnsplashPhotosResult[]) {
-        console.dir(response);
+}
 
-        // convert the response to our representation, since we don't need all of the properties.
-        return response.map(singlePhoto => {
-            return <Photo> {
-                id: singlePhoto.id,
-                created_at: singlePhoto.created_at,
-                authorHandle: singlePhoto.user.username,
-                authorName: singlePhoto.user.name,
-                likes: singlePhoto.likes,
-                urls: singlePhoto.urls,
-                download_link: singlePhoto.links.download
-            }
-        })
-    }, err => {
-        console.dir(err);
-        throw err
+function convertResponsePhotosToInternalFormat(photos: UnsplashPhotosResult[]) {
+    return photos.map(singlePhoto => {
+        return <Photo> {
+            id: singlePhoto.id,
+            created_at: singlePhoto.created_at,
+            authorHandle: singlePhoto.user.username,
+            authorName: singlePhoto.user.name,
+            likes: singlePhoto.likes,
+            urls: singlePhoto.urls,
+            download_link: singlePhoto.links.download
+        }
     });
 }
 
