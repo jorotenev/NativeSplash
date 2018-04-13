@@ -1,2 +1,9 @@
-<Frame defaultPage="main-page">
-</Frame>
+<TabView androidTabsPosition="bottom">
+    <TabViewItem title="Browse">
+        <Frame defaultPage="pages/browse/browse-page"></Frame>
+    </TabViewItem>
+
+    <TabViewItem title="Liked">
+        <Frame defaultPage="pages/liked/liked-page"></Frame>
+    </TabViewItem>
+</TabView>
