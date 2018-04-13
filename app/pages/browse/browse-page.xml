@@ -1,5 +1,53 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" class="page" actionBarHidden="true">
-    <StackLayout class="p-20">
-        <Label text="Browse images" class="h1 text-center"/>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+      class="page"
+      actionBarHidden="true"
+      xmlns:lv="nativescript-ui-listview"
+      navigatingTo="onNavigatingTo"
+>
+    <StackLayout>
+        <Label text="{{photos.length}}"/>
+        <GridLayout class="p-20" rows="*">
+            <lv:RadListView row="0"
+                            id="photos-list"
+                            items="{{ photos }}"
+                            loadOnDemandMode="Auto"
+                            loadMoreDataRequested="onLoadMoreItems"
+                            loadOnDemandBufferSize="2"
+                            itemTap="onTap"
+                            pullToRefresh="true"
+                            pullToRefreshInitiated="onPullToRefreshInitiated"
+            >
+                <lv:RadListView.pullToRefreshStyle>
+                    <lv:PullToRefreshStyle indicatorColor="#fd8c5b"/>
+                </lv:RadListView.pullToRefreshStyle>
+                <lv:RadListView.itemTemplate>
+
+
+                    <StackLayout>
+                        <Image src="{{urls.thumb}}"/>
+                        <Label text='{{authorName}}'/>
+                    </StackLayout>
+
+                </lv:RadListView.itemTemplate>
+            </lv:RadListView>
+            <!--           <ListView row="0"
+                                 id="photos-list"
+                                 items="{{ photos }}"
+                                 loadMoreItems="onLoadMoreItems"
+                                 itemTap="onTap"
+                       >
+
+                           <ListView.itemTemplate>
+
+
+                               <StackLayout>
+                                   <Image src="{{urls.thumb}}"/>
+                                   <Label text='{{authorName}}'/>
+                               </StackLayout>
+
+                           </ListView.itemTemplate>
+                       </ListView>-->
+        </GridLayout>
     </StackLayout>
+
 </Page>
