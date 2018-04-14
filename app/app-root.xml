@@ -1,9 +1,9 @@
 <TabView androidTabsPosition="bottom">
-    <TabViewItem title="Browse">
+    <TabViewItem title="&#xf015; Browse" class="font-awesome">
         <Frame defaultPage="pages/browse/browse-page"></Frame>
     </TabViewItem>
 
-    <TabViewItem title="Liked">
+    <TabViewItem title="&#xf004; Liked" class="font-awesome">
         <Frame defaultPage="pages/liked/liked-page"></Frame>
     </TabViewItem>
 </TabView>
