@@ -25,10 +25,6 @@ export function onNavigatingTo(args: NavigatedData) {
 }
 
 
-export function onPullToRefreshInitiated(event) {
-    console.log("onPullToRefreshInitiated");
-    listView.notifyPullToRefreshFinished();
-}
 
 export function onTap(event: ItemEventData) {
     console.log("tapped index" + event.index)

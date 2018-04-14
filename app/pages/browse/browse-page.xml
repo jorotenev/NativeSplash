@@ -5,49 +5,7 @@
       navigatingTo="onNavigatingTo"
 >
     <StackLayout width="100%">
-        <Label text="{{photos.length}}"/>
         <GridLayout rows="*">
-            <!--     <lv:RadListView row="0"
-                                 id="photos-list"
-                                 items="{{ photos }}"
-                                 loadOnDemandMode="Auto"
-                                 loadMoreDataRequested="onLoadMoreItems"
-                                 loadOnDemandBufferSize="3"
-                                 itemTap="onTap"
-                                 pullToRefresh="true"
-                                 pullToRefreshInitiated="onPullToRefreshInitiated"
-                 >
-                     <lv:RadListView.pullToRefreshStyle>
-                         <lv:PullToRefreshStyle indicatorColor="#fd8c5b"/>
-                     </lv:RadListView.pullToRefreshStyle>
-                     <lv:RadListView.listViewLayout>
-                         <lv:ListViewLinearLayout scrollDirection="Vertical" itemHeight="100"/>
-                     </lv:RadListView.listViewLayout>
-
-                     <lv:RadListView.itemTemplate>
-                         &lt;!&ndash;the binding properties within the itemTemplate are those of a single photo (i.e. a single item from photos&ndash;&gt;
-
-                         <StackLayout>
-
-                             <GridLayout rows="*,auto,auto" class="photos-list-item">
-                                 <Image row="0"
-                                        class="photo"
-                                        src="{{urls.raw | imageLink}}"
-                                        stretch="none"
-                                        width="{{$parents['RadListView'].calculateImageWidth, $parents['RadListView'].calculateImageWidth + 'px' }}"
-                                        height="{{$parents['RadListView'].imageHeight, $parents['RadListView'].imageHeight + 'px' }}"
-                                 />
-
-                                 <DockLayout row="1" class="railway photo-metadata" stretchLastChild="false">
-                                     <Label dock="left" text='{{authorName}}' class="author-name"/>
-                                     <Label dock="right" text='{{likes}}' class="number-likes"/>
-                                 </DockLayout>
-
-                                 <StackLayout class="hr-light" row="2"/>
-                             </GridLayout>
-                         </StackLayout>
-                     </lv:RadListView.itemTemplate>
-                 </lv:RadListView>-->
 
             <ListView row="0"
                       id="photos-list"
