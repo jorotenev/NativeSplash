@@ -1,0 +1,4 @@
+<DockLayout orientation="horizontal" loaded="onLoaded" stretchLastChild="true">
+    <Label verticalAlignment="center" text="{{component_text}}" url="{{component_url}}" class="link" tap="tapped" dock="left"/>
+    <Label verticalAlignment="center" text=" &#xf0c1;" class="font-awesome" dock="right"/>
+</DockLayout>
