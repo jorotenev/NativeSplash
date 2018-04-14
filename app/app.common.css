@@ -30,3 +30,9 @@ Fonts
 .font-awesome {
     font-family: "FontAwesome";
 }
+
+.link {
+    color: dodgerblue;
+    text-decoration: underline;
+    font-weight: 500;
+}
