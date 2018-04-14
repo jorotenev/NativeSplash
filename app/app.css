@@ -20,6 +20,13 @@ components that have the btn class name.
     font-size: 18;
 }
 
+/**
+Fonts
+ */
 .railway {
     font-family: "Raleway-v4020-Regular";
+}
+
+.font-awesome {
+    font-family: "FontAwesome";
 }

@@ -1,18 +1,21 @@
 .photos-list-item {
     min-height: 100;
+    background-color: white;
+    margin-bottom:5;
+}
+
+.photos-list-item .photo-metadata {
     background-color: #eeeeee;
-    padding-bottom: 5em;
-}
-
-.photo-metadata {
-    margin-left: 10;
-    margin-right: 10;
-}
-.photo-metadata .author-name{
+    padding-left: 10;
+    padding-right: 10;
+    min-height: 50;
 
 }
-.photo-metadata .number-likes {
-    font-weight: 900;
+.photo-metadata .author-name {
+}
+.photo-metadata .number-likes-container {
+    /*font-weight: 900;*/
+    color: #ed0000
 }
 
 #photos-list {

@@ -34,7 +34,7 @@
                                         class="photo"
                                         src="{{urls.raw | imageLink}}"
                                         stretch="none"
-                                        width="{{$parents['RadListView'].imageWidth, $parents['RadListView'].imageWidth + 'px' }}"
+                                        width="{{$parents['RadListView'].calculateImageWidth, $parents['RadListView'].calculateImageWidth + 'px' }}"
                                         height="{{$parents['RadListView'].imageHeight, $parents['RadListView'].imageHeight + 'px' }}"
                                  />
 
@@ -65,13 +65,20 @@
                                    class="photo"
                                    src="{{urls.raw | imageLink}}"
                                    stretch="none"
-                                   width="{{$parents['ListView'].imageWidth, $parents['ListView'].imageWidth + 'px' }}"
-                                   height="{{$parents['ListView'].imageHeight, $parents['ListView'].imageHeight + 'px' }}"
+                                   width="{{width, calculateWidth() + 'px'}}"
+                                   height="{{height, calculateHeight() + 'px'}}"
+
                             />
 
                             <DockLayout row="1" class="railway photo-metadata" stretchLastChild="false">
-                                <Label dock="left" text='{{authorName}}' class="author-name"/>
-                                <Label dock="right" text='{{likes}}' class="number-likes"/>
+                                <Label verticalAlignment="center" dock="left" text='{{authorName}}'
+                                       class="author-name"/>
+
+                                <!--f004 is the code for "heart" from the fontawesome.com website-->
+                                <Label dock="right" verticalAlignment="center" text="{{likes , '&#xf004; ' + likes}}"
+                                       class="font-awesome number-likes-container"/>
+                                <!--<Label verticalAlignment="center" dock="right" text='{{likes, "&#xf004; " + likes}}'-->
+                                <!--class=" font-awesome"/>-->
                             </DockLayout>
 
                             <StackLayout class="hr-light" row="2"/>

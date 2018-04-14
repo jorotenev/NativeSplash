@@ -4,16 +4,6 @@ import {Photo} from "~/shared/photo";
 import {getPhotos} from "~/shared/unsplash-service/api"
 import * as platform from "tns-core-modules/platform";
 
-export function imageLink(url) {
-    let w = platform.screen.mainScreen.widthPixels;
-    let h = platform.screen.mainScreen.heightPixels;
-
-    // q = quality (in %), reduces the size
-    // entropy - crop it but try to ensure that the interesting parts of the image are visible
-    let result = `${url}&crop=entropy&w=${w}&h=${w}&fit=crop&q=0.1`;
-    console.log(result);
-    return result
-}
 
 export class BrowseViewModel extends Observable {
 
@@ -31,13 +21,7 @@ export class BrowseViewModel extends Observable {
         this.addMorePhotos()
     }
 
-    public get imageWidth() {
-        return platform.screen.mainScreen.widthPixels
-    }
 
-    public get imageHeight() {
-        return platform.screen.mainScreen.widthPixels
-    }
 
     public addMorePhotos(): Promise<void> {
         console.log("addMorePhotos called");
