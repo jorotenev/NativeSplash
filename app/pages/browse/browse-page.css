@@ -1,0 +1,24 @@
+.photos-list-item {
+    min-height: 100;
+    background-color: #eeeeee;
+    padding-bottom: 5em;
+}
+
+.photo-metadata {
+    margin-left: 10;
+    margin-right: 10;
+}
+.photo-metadata .author-name{
+
+}
+.photo-metadata .number-likes {
+    font-weight: 900;
+}
+
+#photos-list {
+    width: 100%;
+}
+
+.authorName {
+    color: red;
+}

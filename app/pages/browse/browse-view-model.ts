@@ -2,6 +2,18 @@ import {Observable} from "tns-core-modules/data/observable";
 import {ObservableArray} from "tns-core-modules/data/observable-array";
 import {Photo} from "~/shared/photo";
 import {getPhotos} from "~/shared/unsplash-service/api"
+import * as platform from "tns-core-modules/platform";
+
+export function imageLink(url) {
+    let w = platform.screen.mainScreen.widthPixels;
+    let h = platform.screen.mainScreen.heightPixels;
+
+    // q = quality (in %), reduces the size
+    // entropy - crop it but try to ensure that the interesting parts of the image are visible
+    let result = `${url}&crop=entropy&w=${w}&h=${w}&fit=crop&q=0.1`;
+    console.log(result);
+    return result
+}
 
 export class BrowseViewModel extends Observable {
 
@@ -15,7 +27,16 @@ export class BrowseViewModel extends Observable {
     constructor() {
         super();
         this.photos = new ObservableArray<Photo>([]);
+
         this.addMorePhotos()
+    }
+
+    public get imageWidth() {
+        return platform.screen.mainScreen.widthPixels
+    }
+
+    public get imageHeight() {
+        return platform.screen.mainScreen.widthPixels
     }
 
     public addMorePhotos(): Promise<void> {
@@ -25,23 +46,17 @@ export class BrowseViewModel extends Observable {
         let photos = getPhotos({
             page: currentlyLoadedPages + 1,
             per_page: this.batchSize
-        })
-        // return Promise.resolve()
-        photos.then((newPhotos: Photo[]) => {
-            console.log(`${newPhotos.length} photos received by view-model`)
-            newPhotos.forEach(value => {
-                this.photos.push(value)
-            });
-        }, (err) => {
-            throw err
         });
+
+
         return new Promise<void>((resolve, reject) => {
             // return Promise.resolve()
             photos.then((newPhotos: Photo[]) => {
                 console.log(`${newPhotos.length} photos received by view-model`);
 
-                newPhotos.forEach(value => {
-                    this.photos.push(value)
+                newPhotos.forEach(photo => {
+                    console.log(photo.urls.raw);
+                    this.photos.push(photo)
                 });
                 resolve()
             }, (err) => {

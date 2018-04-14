@@ -5,8 +5,11 @@ purpose of the file is to pass control to the app’s first module.
 */
 
 import * as application from 'application';
+import * as platform from "tns-core-modules/platform";
+import {imageLink} from "~/pages/browse/browse-view-model";
 
-application.run({ moduleName: 'app-root' });
+
+application.run({moduleName: 'app-root'});
 
 /*
 Do not place any code after the application has been started as it will not

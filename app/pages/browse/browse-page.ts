@@ -1,8 +1,9 @@
 import {NavigatedData, Page} from "tns-core-modules/ui/page";
-import {BrowseViewModel} from "~/pages/browse/browse-view-model";
+import {BrowseViewModel, imageLink} from "~/pages/browse/browse-view-model";
 import {RadListView} from "nativescript-ui-listview";
 import {ItemEventData} from "tns-core-modules/ui/list-view";
-
+import * as platform from "tns-core-modules/platform";
+import * as application from "application"
 // declare the view-model
 let viewModel: BrowseViewModel;
 
@@ -15,6 +16,7 @@ export function onNavigatingTo(args: NavigatedData) {
     listView = page.getViewById('photos-list');
     viewModel = new BrowseViewModel();
 
+    application.getResources().imageLink = imageLink; // expose a converter function to the UI, application-wide
     page.bindingContext = viewModel
 }
 
@@ -34,6 +36,7 @@ export function onLoadMoreItems(event) {
     setTimeout(() => {
         viewModel.addMorePhotos()
             .then(() => {
+                console.log("Size of photos is " + viewModel.photos.length);
                 listView.notifyLoadOnDemandFinished()
             }, () => {
                 listView.notifyLoadOnDemandFinished()
@@ -41,3 +44,4 @@ export function onLoadMoreItems(event) {
     }, 50)
 
 }
+

@@ -3,6 +3,7 @@ import * as http from "http";
 import {Photo, PhotoSize} from "~/shared/photo";
 
 const secrets = require("~/unsplash_secrets.json");
+const fake_response = require("~/fake_response.json");
 
 const api_url = "https://api.unsplash.com/";
 const access_token = secrets.access_token; // you need an unsplash dev account for that.
@@ -26,8 +27,8 @@ export function getPhotos(options?: UnsplashGetPhotosOpts): Promise<Photo[]> {
     const endpoint = "photos";
     const url = `${api_url}${endpoint}/?page=${opts.page}&per_page=${opts.per_page}&client_id=${access_token}`;
     //todo remove fake
-    let fake = require("./fake_response.json");
-    return Promise.resolve(convertResponsePhotosToInternalFormat(fake))
+
+    return Promise.resolve(convertResponsePhotosToInternalFormat(fake_response))
     // return new Promise(function (resolve, reject) {
     //     http.getJSON(url)
     //         .then(function (response: UnsplashPhotosResult[]) {
@@ -49,6 +50,8 @@ function convertResponsePhotosToInternalFormat(photos: UnsplashPhotosResult[]) {
     return photos.map(singlePhoto => {
         return <Photo> {
             id: singlePhoto.id,
+            width: singlePhoto.width,
+            height: singlePhoto.height,
             created_at: singlePhoto.created_at,
             authorHandle: singlePhoto.user.username,
             authorName: singlePhoto.user.name,
@@ -65,17 +68,17 @@ interface UnsplashGetPhotosOpts {
 }
 
 
-// some of the properties that are received from the API for a single photo
+// subset of the properties that are received from the API for a single photo
 interface UnsplashPhotosResult {
     id: string
     created_at: string
     updated_at: string
     width: number
-    heigth: number
+    height: number
     likes: number
     description: string
     user: { id: string, username: string, name: string }
 
-    urls: {[s in PhotoSize]:string} // hack
-    links: any // hack
+    urls: {[s in PhotoSize]:string}
+    links: { [linkType: string]: string }
 }
