@@ -26,15 +26,43 @@ export class PhotoUtils {
      *  width, height, quality, etc of the image. This way no processing is needed on the device
      *  as the image is already in correct size.
      * @param url a canonical link (i.e. https://images.unsplash.com/photo-1523564146079-b3fc6d3d2e32?x=1)
+     * @param opts
+     *  - keepRatio - if true, the image will keep its original aspect ratio if true
+     *  - reducedQuality - if true, request image with reduced quality to speed up the request
      * @return {string}
      */
-    public static prepareImageLink(url) {
+    public static prepareImageLink(url, opts: { keepRatio: boolean, reducedQuality: boolean }) {
+
+        let options = {
+            keepRatio: false,
+            reducedQuality: true,
+            ...opts
+        };
         let w = platform.screen.mainScreen.widthPixels;
         let h = platform.screen.mainScreen.heightPixels;
+        let unsplashOptions = {
+            w: w
+        };
+        if (!options.keepRatio) {
+            unsplashOptions['h'] = w;
+            unsplashOptions['fit'] = 'crop';
+            unsplashOptions['crop'] = 'entropy'
+        }
+        if (options.reducedQuality) {
+            unsplashOptions['q'] = '0.1';
+        }
 
-        // q = quality (in %), reduces the size
-        // entropy - crop it but try to ensure that the interesting parts of the image are visible
-        let result = `${url}&crop=entropy&w=${w}&h=${w}&fit=crop&q=0.1`;
+        let urlArgs: string = Object.keys(unsplashOptions).reduce(((previousValue, currentValue) => {
+            return `${previousValue}&${currentValue}=${unsplashOptions[currentValue]}`
+        }), "");
+
+        let result = url;
+        if (url.indexOf("?") !== -1) {
+            result = `${result}${urlArgs}`
+        } else {
+            result = `${result}?${urlArgs}`
+        }
+
         console.log(result);
         return result
     }

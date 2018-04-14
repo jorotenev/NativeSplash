@@ -3,8 +3,11 @@ import {BrowseViewModel} from "~/pages/browse/browse-view-model";
 import {RadListView} from "nativescript-ui-listview";
 import {ItemEventData} from "tns-core-modules/ui/list-view";
 
+let frameModule = require("tns-core-modules/ui/frame");
+
 import * as application from "application"
-import {PhotoUtils} from "~/shared/photo";
+import {Photo, PhotoUtils} from "~/shared/photo";
+import {View} from "tns-core-modules/ui/core/view";
 // declare the view-model
 let viewModel: BrowseViewModel;
 
@@ -29,6 +32,22 @@ export function onPullToRefreshInitiated(event) {
 
 export function onTap(event: ItemEventData) {
     console.log("tapped index" + event.index)
+    const view = <View>event.view;
+    const page = <Page>view.page;
+    const tappedItem = <Photo>view.bindingContext;
+
+
+
+    page.frame.navigate({
+        moduleName: "pages/single/single-page",
+        context: tappedItem,
+        animated: true,
+        transition: {
+            name: "slide",
+            duration: 200,
+            curve: "ease"
+        }
+    });
 }
 
 export function onLoadMoreItems(event) {
