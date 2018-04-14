@@ -1,0 +1,6 @@
+﻿@import './app.common.css';
+
+TabView {
+    tab-text-color: grey;
+    selected-tab-text-color: blue;
+}
