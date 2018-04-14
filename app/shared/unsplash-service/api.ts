@@ -28,21 +28,21 @@ export function getPhotos(options?: UnsplashGetPhotosOpts): Promise<Photo[]> {
     const url = `${api_url}${endpoint}/?page=${opts.page}&per_page=${opts.per_page}&client_id=${access_token}`;
     //todo remove fake
 
-    return Promise.resolve(convertResponsePhotosToInternalFormat(fake_response))
-    // return new Promise(function (resolve, reject) {
-    //     http.getJSON(url)
-    //         .then(function (response: UnsplashPhotosResult[]) {
-    //             console.log(`API returned ${response.length} objects`);
-    //
-    //             // convert the response to our representation, since we don't need all of the properties.
-    //             let converted = convertResponsePhotosToInternalFormat(response)
-    //
-    //             resolve(converted)
-    //         }, err => {
-    //             console.dir(err);
-    //             reject(err)
-    //         });
-    // })
+    // return Promise.resolve(convertResponsePhotosToInternalFormat(fake_response))
+    return new Promise(function (resolve, reject) {
+        http.getJSON(url)
+            .then(function (response: UnsplashPhotosResult[]) {
+                console.log(`API returned ${response.length} objects`);
+
+                // convert the response to our representation, since we don't need all of the properties.
+                let converted = convertResponsePhotosToInternalFormat(response)
+
+                resolve(converted)
+            }, err => {
+                console.dir(err);
+                reject(err)
+            });
+    })
 
 }
 
@@ -57,7 +57,9 @@ function convertResponsePhotosToInternalFormat(photos: UnsplashPhotosResult[]) {
             authorName: singlePhoto.user.name,
             likes: singlePhoto.likes,
             urls: singlePhoto.urls,
-            download_link: singlePhoto.links.download
+            download_link: singlePhoto.links.download,
+            description: singlePhoto.description,
+            online_link: singlePhoto.links.html
         }
     });
 }

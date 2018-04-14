@@ -14,9 +14,11 @@ export interface Photo {
     authorName: string
     authorHandle: string
 
+    description: string
     // urls: { raw: string, full: string, regular: string, small: string, thumb: string }
     urls: { [s in PhotoSize] : string}
     download_link: url
+    online_link: url
 }
 
 export class PhotoUtils {
