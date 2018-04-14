@@ -65,8 +65,8 @@
                                    class="photo"
                                    src="{{urls.raw | imageLink}}"
                                    stretch="none"
-                                   width="{{width, calculateWidth() + 'px'}}"
-                                   height="{{height, calculateHeight() + 'px'}}"
+                                   width="{{ calculateWidth() + 'px'}}"
+                                   height="{{ calculateHeight() + 'px'}}"
 
                             />
 
@@ -74,11 +74,8 @@
                                 <Label verticalAlignment="center" dock="left" text='{{authorName}}'
                                        class="author-name"/>
 
-                                <!--f004 is the code for "heart" from the fontawesome.com website-->
                                 <Label dock="right" verticalAlignment="center" text="{{likes , '&#xf004; ' + likes}}"
                                        class="font-awesome number-likes-container"/>
-                                <!--<Label verticalAlignment="center" dock="right" text='{{likes, "&#xf004; " + likes}}'-->
-                                <!--class=" font-awesome"/>-->
                             </DockLayout>
 
                             <StackLayout class="hr-light" row="2"/>
