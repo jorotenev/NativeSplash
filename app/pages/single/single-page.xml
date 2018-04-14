@@ -1,7 +1,20 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" class="page" actionBarHidden="true"   navigatingTo="onNavigatingTo">
-    <StackLayout>
-        <Image src="{{ photo.urls.raw | imageLink({keepRatio:true})  }}"/>
-        <Label text="{{photo.authorName}}"/>
-        <Label text="asd"/>
-    </StackLayout>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+      class="page" actionBarHidden="true" navigatingTo="onNavigatingTo"
+      xmlns:l="components/link"
+
+>
+    <ScrollView>
+        <!--padding 20-->
+        <StackLayout class="railway single-container">
+            <Image src="{{ photo.urls.raw | imageLink({keepRatio:true})  }}"/>
+            <StackLayout class="metadata p-20">
+                <ActivityIndicator busy="{{busy}}"
+                                   visibility="{{busy, busy ? 'visible':'collapsed'}}"></ActivityIndicator>
+                <l:link url="{{photo.online_link}}" text="{{photo.authorName}}"/>
+                <Button text="&#xf0c7; Save" tap="onSavePhoto" class="font-awesome"/>
+                <Label text="{{photo.description}}"/>
+            </StackLayout>
+
+        </StackLayout>
+    </ScrollView>
 </Page>
